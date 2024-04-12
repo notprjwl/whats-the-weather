@@ -1,11 +1,13 @@
-import React from 'react'
+import { ChangeEvent } from 'react'
 
-type Props = {}
+type Props = {
+  onSearchChange: (e:ChangeEvent<HTMLInputElement>) => void;
+}
 
-export default function Search({}: Props) {
+export default function Search({onSearchChange}: Props) {
   return (
     <div className='items-center flex justify-center mx-auto p-3'>
-        <input type="search" placeholder='search city' className='outline outline-1 p-2 rounded-lg focus:border-0 focus:ring-0 active:border-0 active:ring-0 active:bg-none' />
+        <input type="search" placeholder='search city' className='outline outline-1 p-2 rounded-lg focus:border-0 focus:ring-0 active:border-0 active:ring-0 active:bg-none' onChange={onSearchChange} />
     </div>
   )
 }
