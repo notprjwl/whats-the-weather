@@ -22,7 +22,9 @@ export default {
     extend: {
       fontFamily: {
         roboto: ["Roboto"],
-        Montserrat: ["Montserrat"]
+        Montserrat: ["Montserrat"],
+        oswald: ["Oswald"],
+        outfit: ["Outfit"] 
       },
       colors: {
         navBg: "#1f1f1f",
