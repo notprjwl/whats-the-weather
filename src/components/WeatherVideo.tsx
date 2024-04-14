@@ -95,4 +95,5 @@ const WeatherVideo = ({ weatherDescription, dayOrNight }: Props) => {
   );
 };
 
+
 export default WeatherVideo;
