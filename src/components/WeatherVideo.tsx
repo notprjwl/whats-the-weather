@@ -62,7 +62,7 @@ const WeatherVideo = ({ weatherDescription, dayOrNight }: Props) => {
             setVideoSource(thunder);
             break;
           case weatherDescription.includes("clouds"):
-            setVideoSource(cloudy);
+            setVideoSource(eveningClouds);
             break;
           case weatherDescription.includes("snow"):
             setVideoSource(snow);
