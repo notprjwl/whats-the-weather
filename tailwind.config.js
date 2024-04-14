@@ -17,7 +17,7 @@ export default {
 
       sm: { max: "639px" },
       // => @media (max-width: 639px) { ... }
-      xs: { max: "200px" },
+      xs: { max: "320px" },
     },
     extend: {
       fontFamily: {
@@ -28,6 +28,8 @@ export default {
       },
       colors: {
         navBg: "#1f1f1f",
+        bg: "#202020",
+        text: "#eeeeee"
       }
     },
   },
