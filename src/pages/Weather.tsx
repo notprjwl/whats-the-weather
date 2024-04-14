@@ -87,25 +87,26 @@ export default function Weather({}: Props) {
       ) : (
         <>
           {weatherDescription && <WeatherVideo weatherDescription={weatherDescription} dayOrNight={dayOrNight} />}
+          <div className="">
           <div className='w-full mx-auto flex justify-center items-center h-[90vh]'>
-            <div className='rounded-2xl text-white bg-opacity-30 bg-black h-[50vh] w-[26rem] p-5 z-10 m-5 '>
+            <div className='rounded-2xl text-white bg-opacity-30 bg-black h-[50vh] w-[26rem] p-5 z-10 m-5 transition-all ease-in-out duration-500'>
               <div className='text-gray-200 font-mono flex justify-between'>
-                <h1 className='text-1xl sm:text-xs'> Current Weather </h1>
-                <h1 className='tracking-tighter text-[1rem] sm:text-xs'> {date.toLocaleString()} </h1>
+                <h1 className='text-1xl sm:text-xs transition-all ease-in-out duration-500'> Current Weather </h1>
+                <h1 className='tracking-tighter text-[1rem] sm:text-xs transition-all ease-in-out duration-500'> {date.toLocaleString()} </h1>
               </div>
               <div className="flex justify-between">
               <h1 className='text-sm font-light italic'>{forecast?.list[0].weather[0].description}</h1>
               <CtoF onToggleTemperature={handleToggleTemperature} isCelsius={isCelsius}/>
               </div>
-              <div className='inline p-3 font-outfit'>
+              <div className='inline p-3 font-outfit transition-all ease-in-out duration-500'>
                 <div className='flex'>
-                  <h1 className='text-7xl sm:text-6xl '>{forecast?.name}</h1>
+                  <h1 className='text-7xl sm:text-6xl transition-all ease-in-out duration-500 '>{forecast?.name}</h1>
                   {/* <div className='inline'>
       <img src={forecast && `https://openweathermap.org/img/wn/${forecast.list[0].weather[0].icon}@2x.png`} className='mx-auto max-w-[100] ' />
     </div> */} 
                 </div>
                 <div className='flex'>
-                  <div className='font-semibold inline pt-1'>
+                  <div className='font-semibold inline pt-1 transition-all ease-in-out duration-500'>
                     {temperature !== null && (
                       <div className='inline text-8xl sm:2xl '>
                         {isCelsius ? KtoC(temperature) : KtoF(temperature)}°<span className='text-4xl opacity-90'>{isCelsius ? 'C' : 'F'}</span>
@@ -118,6 +119,7 @@ export default function Weather({}: Props) {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </>
       )}
