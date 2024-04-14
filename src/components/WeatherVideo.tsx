@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import rain from "../assets/weather-clips/rain.mp4";
 import sunny from "../assets/weather-clips/sunny.mp4";
