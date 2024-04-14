@@ -8,8 +8,8 @@ import Navbar from "../components/Navbar";
 export default function Home() {
   const [cities, setCities] = useState<CityItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [hasMore, setHasMore] = useState<boolean>(true);
-  const [index, setIndex] = useState<number>(20);
+  const [hasMore] = useState<boolean>(true);
+  const [index] = useState<number>(20);
   const [searchData, setSearchData] = useState<CityItem[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   // const [sortKey, setSortKey] = useState<keyof CityItem>("name");
