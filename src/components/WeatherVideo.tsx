@@ -9,7 +9,7 @@ import snow from "../assets/weather-clips/snow.mp4";
 import mist from "../assets/weather-clips/mist.mp4";
 import darkNightClouds from "../assets/weather-clips/darkNightClouds.mp4";
 import nightSky from "../assets/weather-clips/nightSky.mp4";
-import cloudy from "../assets/weather-clips/cloudy.mp4";
+// import cloudy from "../assets/weather-clips/cloudy.mp4";
 
 
 type Props = {
