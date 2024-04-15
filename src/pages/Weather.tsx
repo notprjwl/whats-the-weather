@@ -156,7 +156,7 @@ export default function Weather({}: Props) {
                   </div>
                 </div>
                 <div>
-                  <section className='flex overflow-x-scroll items-center justify-start p-2'>
+                  <section className='flex overflow-x-scroll justify-start p-2 my-2'>
                     {forecast?.list.map((item, i) => (
                       <div className='inline-block text-center px-3' key={i}>
                         <p className="font-outfit">{i === 0 ? "Now" : new Date(item.dt * 1000 + 5.5 * 60 * 60 * 1000).getUTCHours()}</p>
