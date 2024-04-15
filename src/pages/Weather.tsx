@@ -41,7 +41,7 @@ export default function Weather({}: Props) {
           setTemperature(forecastLiveData.main.temp);
           const forecastData = {
             ...data.city,
-            list: data.list.slice(0, 6),
+            list: data.list.slice(0, 15),
           };
           setForecast(forecastData);
           console.log(forecastData);
@@ -103,7 +103,7 @@ export default function Weather({}: Props) {
           {error && <div className='text-red-500'>{error}</div>}
           <div className=''>
             <div className='w-full mx-auto flex justify-center items-center absolute inset-0'>
-              <div className='rounded-2xl text-white bg-opacity-30 bg-black h-[50vh] w-[26rem] p-5 z-10 m-5 transition-all ease-in-out duration-500'>
+              <div className='rounded-2xl text-white bg-opacity-30 bg-black h-[50vh] w-[26rem] sm:w-[20rem] p-5 z-10 m-5 transition-all ease-in-out duration-500'>
                 <div className='text-gray-200 font-mono flex justify-between'>
                   <h1 className='text-1xl sm:text-xs transition-all ease-in-out duration-500'> Current Weather </h1>
                   <h1 className='tracking-tighter text-[1rem] sm:text-xs transition-all ease-in-out duration-500'> {date.toLocaleString()} </h1>
@@ -114,7 +114,7 @@ export default function Weather({}: Props) {
                 </div>
                 <div className='inline p-3 font-outfit transition-all ease-in-out duration-500'>
                   <div className='flex gap-2 justify-between'>
-                    <h1 className='text-7xl sm:text-5xl transition-all ease-in-out duration-500 text-clamp font-semibold '>{forecast?.name}</h1>
+                    <h1 className='text-7xl sm:text-3xl transition-all ease-in-out duration-500 text-clamp font-semibold '>{forecast?.name}</h1>
                     <div className='text-1xl h-full'>
                       <div className='flex gap-2 justify-between'>
                         <h1 className='flex'>
@@ -132,7 +132,7 @@ export default function Weather({}: Props) {
                       </div>
                       <div className='flex gap-1 justify-between text-sm '>
                         pop: {forecast?.list[0].pop}%<h1></h1>
-                        <h1 className="flex">
+                        <h1 className='flex'>
                           <svg className='w-4 h-5' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' viewBox='0 0 24 24'>
                             <path d='M11.782 5.72a4.773 4.773 0 0 0-4.8 4.173 3.43 3.43 0 0 1 2.741-1.687c1.689 0 2.974 1.972 3.758 2.587a5.733 5.733 0 0 0 5.382.935c2-.638 2.934-2.865 3.137-3.921-.969 1.379-2.44 2.207-4.259 1.231-1.253-.673-2.19-3.438-5.959-3.318ZM6.8 11.979A4.772 4.772 0 0 0 2 16.151a3.431 3.431 0 0 1 2.745-1.687c1.689 0 2.974 1.972 3.758 2.587a5.733 5.733 0 0 0 5.382.935c2-.638 2.933-2.865 3.137-3.921-.97 1.379-2.44 2.208-4.259 1.231-1.253-.673-2.19-3.443-5.963-3.317Z' />
                           </svg>
@@ -154,6 +154,21 @@ export default function Weather({}: Props) {
                       </h1>
                     </div>
                   </div>
+                </div>
+                <div>
+                  <section className='flex overflow-x-scroll justify-evenly p-2'>
+                    {forecast?.list.map((item, i) => (
+                      <div className='inline-block text-center px-3' key={i}>
+                        <p className="font-outfit">{i === 0 ? "Now" : new Date(item.dt * 1000 + 5.5 * 60 * 60 * 1000).getUTCHours()}</p>
+                        <img src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={`weather-icon-${item.weather[0].description}`} />
+                        <p className='text-sm font-bold'>
+                          <p className='text-sm font-bold'>
+                            {isCelsius ? KtoC(item.main.temp) : KtoF(item.main.temp)}°{isCelsius ? "C" : "F"}
+                          </p>
+                        </p>
+                      </div>
+                    ))}
+                  </section>
                 </div>
               </div>
             </div>
