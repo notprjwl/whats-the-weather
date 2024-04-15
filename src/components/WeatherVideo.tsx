@@ -86,7 +86,7 @@ const WeatherVideo = ({ weatherDescription, dayOrNight }: Props) => {
   }, [weatherDescription]);
 
   return (
-    <video autoPlay loop muted className='absolute inset-0 object-cover w-full h-full'>
+    <video autoPlay loop muted playsInline className='absolute inset-0 object-cover w-full h-full'>
       <source src={videoSource} type='video/mp4' />
     </video>
   );
