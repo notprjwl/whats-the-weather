@@ -102,8 +102,8 @@ export default function Weather({}: Props) {
           {weatherDescription && <WeatherVideo weatherDescription={weatherDescription} dayOrNight={dayOrNight} />}
           {error && <div className='text-red-500'>{error}</div>}
           <div className=''>
-            <div className='w-full mx-auto flex justify-center items-center absolute inset-0'>
-              <div className='rounded-2xl text-white bg-opacity-30 bg-black h-[50vh] w-[26rem] sm:w-[20rem] p-5 z-10 m-5 transition-all ease-in-out duration-500'>
+            <div className={`w-full mx-auto flex justify-center items-center absolute inset-0 transition-all duration-500 ease-in-out transform`}>
+              <div className={`rounded-2xl text-white bg-opacity-30 bg-black h-[50vh] w-[26rem] sm:w-[20rem] p-5 z-10 m-5 transition-all duration-500 ease-in-out`}>
                 <div className='text-gray-200 font-mono flex justify-between'>
                   <h1 className='text-1xl sm:text-xs transition-all ease-in-out duration-500'> Current Weather </h1>
                   <h1 className='tracking-tighter text-[1rem] sm:text-xs transition-all ease-in-out duration-500'> {date.toLocaleString()} </h1>
@@ -156,7 +156,7 @@ export default function Weather({}: Props) {
                   </div>
                 </div>
                 <div>
-                  <section className='flex overflow-x-scroll items-center justify-evenly p-2'>
+                  <section className='flex overflow-x-scroll items-center justify-start p-2'>
                     {forecast?.list.map((item, i) => (
                       <div className='inline-block text-center px-3' key={i}>
                         <p className="font-outfit">{i === 0 ? "Now" : new Date(item.dt * 1000 + 5.5 * 60 * 60 * 1000).getUTCHours()}</p>
