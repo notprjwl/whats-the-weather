@@ -41,7 +41,7 @@ export default function Weather({}: Props) {
           setTemperature(forecastLiveData.main.temp);
           const forecastData = {
             ...data.city,
-            list: data.list.slice(0, 15),
+            list: data.list.slice(0, 8),
           };
           setForecast(forecastData);
           console.log(forecastData);
@@ -156,11 +156,11 @@ export default function Weather({}: Props) {
                   </div>
                 </div>
                 <div>
-                  <section className='flex overflow-x-scroll justify-evenly p-2'>
+                  <section className='flex overflow-x-scroll items-center justify-evenly p-2'>
                     {forecast?.list.map((item, i) => (
                       <div className='inline-block text-center px-3' key={i}>
                         <p className="font-outfit">{i === 0 ? "Now" : new Date(item.dt * 1000 + 5.5 * 60 * 60 * 1000).getUTCHours()}</p>
-                        <img src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={`weather-icon-${item.weather[0].description}`} />
+                        <img src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={`weather-icon-${item.weather[0].description}`}/>
                         <p className='text-sm font-bold'>
                           <p className='text-sm font-bold'>
                             {isCelsius ? KtoC(item.main.temp) : KtoF(item.main.temp)}°{isCelsius ? "C" : "F"}
