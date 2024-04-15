@@ -9,7 +9,10 @@ import snow from "../assets/weather-clips/snow.mp4";
 import mist from "../assets/weather-clips/mist.mp4";
 import darkNightClouds from "../assets/weather-clips/darkNightClouds.mp4";
 import nightSky from "../assets/weather-clips/nightSky.mp4";
-// import cloudy from "../assets/weather-clips/cloudy.mp4";
+import thunder2 from "../assets/weather-clips/thunder2.mp4"
+import nightRain from "../assets/weather-clips/nightRain.mp4"
+import night from "../assets/weather-clips/night.mp4"
+import cloudy2 from "../assets/weather-clips/cloudy2.mp4"
 
 
 type Props = {
@@ -31,7 +34,7 @@ const WeatherVideo = ({ weatherDescription, dayOrNight }: Props) => {
           setVideoSource(thunder);
           break;
         case weatherDescription.includes("clouds"):
-          setVideoSource(eveningClouds);
+          setVideoSource(cloudy2);
           break;
         case weatherDescription.includes("snow"):
           setVideoSource(snow);
@@ -56,34 +59,28 @@ const WeatherVideo = ({ weatherDescription, dayOrNight }: Props) => {
       switch (true) {
           case weatherDescription.includes("rain"):
           case weatherDescription.includes("shower rain"):
-            setVideoSource(rain);
+            setVideoSource(nightRain);
             break;
           case weatherDescription.includes("thunderstorm"):
-            setVideoSource(thunder);
+            setVideoSource(thunder2);
             break;
           case weatherDescription.includes("clouds"):
-            setVideoSource(eveningClouds);
-            break;
-          case weatherDescription.includes("snow"):
-            setVideoSource(snow);
-            break;
-          case weatherDescription.includes("mist"):
-            setVideoSource(mist);
-            break;
-          case weatherDescription.includes("scattered clouds"):
-            setVideoSource(eveningClouds);
-            break;
-          case weatherDescription.includes("broken clouds"):
-            setVideoSource(darkNightClouds);
-            break;
-          case weatherDescription.includes("clear"):
-            setVideoSource(cloudySunny);
-            break;
-          default:
             setVideoSource(nightSky);
             break;
+          case weatherDescription.includes("scattered clouds"):
+            setVideoSource(nightSky);
+            break;
+          case weatherDescription.includes("broken clouds"):
+            setVideoSource(nightSky);
+            break;
+          case weatherDescription.includes("clear"):
+            setVideoSource(night);
+            break;
+          default:
+            setVideoSource(night);
+            break;
       }
-      setVideoSource(nightSky)
+      setVideoSource(night)
     }
    
   }, [weatherDescription]);
