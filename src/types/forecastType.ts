@@ -18,7 +18,7 @@ export type forecastType = {
         temp_max: number;
         temp_min: number;
       };
-
+      dt: number;
       weather: [
         {
           description: string;
