@@ -39,3 +39,32 @@ export type forecastType = {
     }
   ];
 };
+
+export type ForecastLiveType = {
+  name: string;
+  main: {
+    feels_like: number;
+    humidity: number;
+    pressure: number;
+    temp: number;
+    temp_max: number;
+    temp_min: number;
+  };
+  sys: {
+    sunrise: number;
+    sunset: number;
+  };
+  visibility: number;
+  weather: [
+    {
+      description: string;
+      icon: string;
+      main: string;
+    }
+  ];
+  wind: {
+    speed: number;
+    deg: number;
+    gust: number;
+  };
+};
