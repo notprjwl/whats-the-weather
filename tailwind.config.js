@@ -24,15 +24,17 @@ export default {
         roboto: ["Roboto"],
         Montserrat: ["Montserrat"],
         oswald: ["Oswald"],
-        outfit: ["Outfit"] 
+        outfit: ["Outfit"],
       },
       colors: {
         navBg: "#1f1f1f",
         bg: "#202020",
-        text: "#eeeeee"
-      }
+        text: "#eeeeee",
+      },
+      fontSize: {
+        clamp: "clamp(1rem, 5vw, 3rem)",
+      },
     },
   },
   plugins: [],
-}
-
+};
