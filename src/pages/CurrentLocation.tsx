@@ -23,15 +23,6 @@ export default function CurrentLocation({}: Props) {
   const longitude = searchParams.get("lon");
   const [forecastLive, setForecastLive] = useState<ForecastLiveType>();
   
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timeOut = setTimeout(()=> {
-      setIsVisible(true);
-    }, 100)
-    return () => clearTimeout(timeOut)
-  });
-
 
   useEffect(() => {
     const fetchData = async () => {
