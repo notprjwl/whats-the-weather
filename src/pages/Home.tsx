@@ -106,7 +106,7 @@ export default function Home() {
     setCities(sortedSlicedCities);
   };
 
-  const colors = ["text-white", "text-cyan-200", "text-purple-300", "text-yellow-200", "text-red-200", "text-[#000087]"];
+  const colors = ["bg-gradient-to-r from-yellow-300 to-[#f4ae04] bg-clip-text text-transparent", "text-[#fcf187]", "text-[#91ceff]", "text-yellow-200", "text-red-200", "text-[#000087]", "text-[#f4ae04]", "text-[#0066ff]"];
 
   const [currentColorIndex, setCurrentColorIndex] = useState<number>(0);
 
@@ -134,16 +134,24 @@ export default function Home() {
     <>
       <Navbar backgroundColor='bg-bg' handleHover={handleHover} currentColor={currentColor} />
       <body className='bg-bg text-text font-outfit min-h-screen'>
-        <div className='flex justify-center h-[70vh] align-center place-items-center'>
+        <div className='flex justify-center h-[70vh] sm:h-[60vh] align-center place-items-center'>
           <div className='text-center p-5'>
             <span className='text-6xl sm:text-4xl font-bold'>
-              Is your weather <span className={`italic ${currentColor} text-6xl sm:text-4xl cursor-pointer transition-all duration-500 ease-in-out`} onMouseEnter={handleHover}>weathering</span> today?
+              Is your weather <span className={`italic ${currentColor} text-6xl sm:text-4xl cursor-pointer transition-all duration-500 ease-in-out px-1`} onMouseEnter={handleHover}>weathering</span> today?
             </span>{" "}
             <br />
             <span className="text-2xl text-1xl font-light">
-            <span className='hover:px-1 hover:bg-gray-300 hover:text-bg transition-all duration-500 ease-in-out rounded-md cursor-pointer font-semibold' onMouseEnter={handleHover} onClick={handleLocationClick}>click here</span> to find out!</span>
+            <span className='hover:px-1 hover:bg-gray-300 hover:text-bg transition-all duration-500 ease-in-out rounded-md cursor-pointer font-semibold bg-[#383838] px-2' onMouseEnter={handleHover} onClick={handleLocationClick}>click here</span> to find out!</span>
+            <div className="mt-[150px] text-4xl sm:text-2xl sm:mt-[130px]">
+              <h1 className="font-mono font-bold italic">
+                OR <br />
+                <p className="text-sm sm:text-xs font-normal not-italic font-outfit">(select cities from the table below)</p>
+              </h1>
+            </div>
           </div>
+          
         </div>
+        
         {loading && <Loading />}
         {!loading && <Search onSearchChange={handleSearchChange} />}
         {!searchQuery && !loading && (
