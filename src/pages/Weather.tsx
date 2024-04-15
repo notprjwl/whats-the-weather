@@ -88,7 +88,7 @@ export default function Weather({}: Props) {
         <>
           {weatherDescription && <WeatherVideo weatherDescription={weatherDescription} dayOrNight={dayOrNight} />}
           <div className="">
-          <div className='w-full mx-auto flex justify-center items-center h-[90vh]'>
+          <div className='w-full mx-auto flex justify-center items-center absolute inset-0'>
             <div className='rounded-2xl text-white bg-opacity-30 bg-black h-[50vh] w-[26rem] p-5 z-10 m-5 transition-all ease-in-out duration-500'>
               <div className='text-gray-200 font-mono flex justify-between'>
                 <h1 className='text-1xl sm:text-xs transition-all ease-in-out duration-500'> Current Weather </h1>
