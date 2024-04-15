@@ -56,7 +56,7 @@ export default function CurrentLocation({}: Props) {
       }
     };
     fetchData();
-  }, [name]);
+  }, [latitude, longitude]);
 
   useEffect(() => {
     const interval = setInterval(() => {
