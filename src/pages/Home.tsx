@@ -106,10 +106,44 @@ export default function Home() {
     setCities(sortedSlicedCities);
   };
 
+  const colors = ["text-white", "text-cyan-200", "text-purple-300", "text-yellow-200", "text-red-200", "text-[#000087]"];
+
+  const [currentColorIndex, setCurrentColorIndex] = useState<number>(0);
+
+  const handleHover = () => {
+    setCurrentColorIndex((currentColorIndex + 1) % colors.length);
+  };
+
+  const currentColor = colors[currentColorIndex];
+  
+  const handleLocationClick = () => {
+    // Get user's current location using Geolocation API
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        // Navigate to the Weather page with the location data
+        navigate(`/weather?lat=${latitude}&lon=${longitude}`);
+      },
+      (error) => {
+        console.error("Error getting user's location:", error);
+      }
+    );
+  };
+
   return (
     <>
-      <Navbar backgroundColor='bg-bg' />
+      <Navbar backgroundColor='bg-bg' handleHover={handleHover} currentColor={currentColor} />
       <body className='bg-bg text-text font-outfit min-h-screen'>
+        <div className='flex justify-center h-[70vh] align-center place-items-center'>
+          <div className='text-center p-5'>
+            <span className='text-6xl sm:text-4xl font-bold'>
+              Is your weather <span className={`italic ${currentColor} text-6xl sm:text-4xl cursor-pointer transition-all duration-500 ease-in-out`} onMouseEnter={handleHover}>weathering</span> today?
+            </span>{" "}
+            <br />
+            <span className="text-2xl text-1xl font-light">
+            <span className='hover:px-1 hover:bg-gray-300 hover:text-bg transition-all duration-500 ease-in-out rounded-md cursor-pointer font-semibold' onMouseEnter={handleHover} onClick={handleLocationClick}>click here</span> to find out!</span>
+          </div>
+        </div>
         {loading && <Loading />}
         {!loading && <Search onSearchChange={handleSearchChange} />}
         {!searchQuery && !loading && (
@@ -185,71 +219,71 @@ export default function Home() {
 
         {searchQuery && (
           <div className='flex justify-center items-center mx-auto'>
-          <table className='shadow-2xl shadow-black w-[40rem] sm:w-[5rem] p-5 m-3'>
-            <thead className='bg-gray-800 max-w-[50%]'>
-              <tr className='text-2xl w-200px'>
-                <th className='w-[200px] sm:w-[100px] text-start px-4 p-2'>
-                  <span className='cursor-pointer flex gap-2' onClick={() => handleSort("name")}>
-                    City
-                    {sortHistory.find((item) => item.key === "name") &&
-                      (sortHistory.find((item) => item.key === "name")!.order === "asc" ? (
-                        <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6'>
-                          <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 15.75 7.5-7.5 7.5 7.5' />
-                        </svg>
-                      ) : (
-                        <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6 mt-1'>
-                          <path strokeLinecap='round' strokeLinejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' />
-                        </svg>
-                      ))}
-                  </span>
-                </th>
-                <th className='w-[200px] text-start px-4 p-2'>
-                  <span className='cursor-pointer flex gap-3' onClick={() => handleSort("country")}>
-                    Country
-                    {sortHistory.find((item) => item.key === "country") &&
-                      (sortHistory.find((item) => item.key === "country")!.order === "asc" ? (
-                        <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6'>
-                          <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 15.75 7.5-7.5 7.5 7.5' />
-                        </svg>
-                      ) : (
-                        <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6 mt-1'>
-                          <path strokeLinecap='round' strokeLinejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' />
-                        </svg>
-                      ))}
-                  </span>
-                </th>
-                <th className='w-[200px] text-start px-4 p-2 visible sm:hidden'>
-                  <span className='cursor-pointer flex gap-3' onClick={() => handleSort("timezone")}>
-                    Timezone
-                    {sortHistory.find((item) => item.key === "timezone") &&
-                      (sortHistory.find((item) => item.key === "timezone")!.order === "asc" ? (
-                        <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6'>
-                          <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 15.75 7.5-7.5 7.5 7.5' />
-                        </svg>
-                      ) : (
-                        <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6 mt-1'>
-                          <path strokeLinecap='round' strokeLinejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' />
-                        </svg>
-                      ))}
-                  </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {slicedCities.map((city, index) => (
-                <tr key={index}>
-                  <td className='p-2 px-3 text-1xl max-w-[130px] sm:text-sm'>
-                    <span className='cursor-pointer' onClick={() => handleClick(city.id, city.name)}>
-                      {city.name}
+            <table className='shadow-2xl shadow-black w-[40rem] sm:w-[5rem] p-5 m-3'>
+              <thead className='bg-gray-800 max-w-[50%]'>
+                <tr className='text-2xl w-200px'>
+                  <th className='w-[200px] sm:w-[100px] text-start px-4 p-2'>
+                    <span className='cursor-pointer flex gap-2' onClick={() => handleSort("name")}>
+                      City
+                      {sortHistory.find((item) => item.key === "name") &&
+                        (sortHistory.find((item) => item.key === "name")!.order === "asc" ? (
+                          <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6'>
+                            <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 15.75 7.5-7.5 7.5 7.5' />
+                          </svg>
+                        ) : (
+                          <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6 mt-1'>
+                            <path strokeLinecap='round' strokeLinejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' />
+                          </svg>
+                        ))}
                     </span>
-                  </td>
-                  <td className='p-2 px-3 text-1xl max-w-[130px] sm:text-sm '>{city.country}</td>
-                  <td className='p-2 px-3 text-1xl max-w-[130px] sm:text-sm visible sm:hidden'>{city.timezone}</td>
+                  </th>
+                  <th className='w-[200px] text-start px-4 p-2'>
+                    <span className='cursor-pointer flex gap-3' onClick={() => handleSort("country")}>
+                      Country
+                      {sortHistory.find((item) => item.key === "country") &&
+                        (sortHistory.find((item) => item.key === "country")!.order === "asc" ? (
+                          <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6'>
+                            <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 15.75 7.5-7.5 7.5 7.5' />
+                          </svg>
+                        ) : (
+                          <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6 mt-1'>
+                            <path strokeLinecap='round' strokeLinejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' />
+                          </svg>
+                        ))}
+                    </span>
+                  </th>
+                  <th className='w-[200px] text-start px-4 p-2 visible sm:hidden'>
+                    <span className='cursor-pointer flex gap-3' onClick={() => handleSort("timezone")}>
+                      Timezone
+                      {sortHistory.find((item) => item.key === "timezone") &&
+                        (sortHistory.find((item) => item.key === "timezone")!.order === "asc" ? (
+                          <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6'>
+                            <path strokeLinecap='round' strokeLinejoin='round' d='m4.5 15.75 7.5-7.5 7.5 7.5' />
+                          </svg>
+                        ) : (
+                          <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' strokeWidth={1} stroke='currentColor' className='w-6 h-6 mt-1'>
+                            <path strokeLinecap='round' strokeLinejoin='round' d='m19.5 8.25-7.5 7.5-7.5-7.5' />
+                          </svg>
+                        ))}
+                    </span>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {slicedCities.map((city, index) => (
+                  <tr key={index}>
+                    <td className='p-2 px-3 text-1xl max-w-[130px] sm:text-sm'>
+                      <span className='cursor-pointer' onClick={() => handleClick(city.id, city.name)}>
+                        {city.name}
+                      </span>
+                    </td>
+                    <td className='p-2 px-3 text-1xl max-w-[130px] sm:text-sm '>{city.country}</td>
+                    <td className='p-2 px-3 text-1xl max-w-[130px] sm:text-sm visible sm:hidden'>{city.timezone}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </body>
     </>
