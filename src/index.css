@@ -12,3 +12,8 @@
       height: -webkit-fill-available;
     }
   }
+
+
+*-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
