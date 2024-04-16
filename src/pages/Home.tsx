@@ -134,7 +134,7 @@ export default function Home() {
     <>
       <Navbar backgroundColor='bg-bg' handleHover={handleHover} currentColor={currentColor} />
       <body className='bg-bg text-text font-outfit min-h-screen'>
-        <div className='flex justify-center h-[70vh] sm:h-[60vh] align-center place-items-center'>
+        <div className='grid justify-center h-[70vh] sm:h-[60vh] align-center place-items-center'>
           <div className='text-center p-5'>
             <span className='text-6xl sm:text-4xl font-bold'>
               Is your weather <span className={`italic ${currentColor} text-6xl sm:text-4xl cursor-pointer transition-all duration-500 ease-in-out px-1`} onMouseEnter={handleHover}>weathering</span> today?
@@ -142,15 +142,17 @@ export default function Home() {
             <br />
             <span className="text-2xl text-1xl font-light">
             <span className='hover:px-1 hover:bg-gray-300 hover:text-bg transition-all duration-500 ease-in-out rounded-md cursor-pointer font-semibold bg-[#383838] px-2' onMouseEnter={handleHover} onClick={handleLocationClick}>click here</span> to find out!</span>
-            <div className="mt-[150px] text-4xl sm:text-2xl sm:mt-[130px]">
+          </div>
+          <div className=" text-4xl sm:text-2xl text-center">
               <h1 className="font-mono font-bold italic">
                 OR <br />
                 <p className="text-sm sm:text-xs font-normal not-italic font-outfit">(select cities from the table below)</p>
               </h1>
             </div>
           </div>
+         
           
-        </div>
+        
         
         {loading && <Loading />}
         {!loading && <Search onSearchChange={handleSearchChange} />}
