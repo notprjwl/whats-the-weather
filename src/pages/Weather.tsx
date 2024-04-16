@@ -101,29 +101,29 @@ export default function Weather({}: Props) {
         <>
           {weatherDescription && <WeatherVideo weatherDescription={weatherDescription} dayOrNight={dayOrNight} />}
           {error && <div className='text-red-500'>{error}</div>}
-          <div className=''>
+          <div className='container'>
             <div className={`w-full mx-auto flex justify-center items-center absolute inset-0 transition-all duration-500 ease-in-out transform`}>
-              <div className={`rounded-2xl text-white bg-opacity-30 bg-black h-[50vh] w-[26rem] sm:w-[20rem] p-5 z-10 m-5 transition-all duration-500 ease-in-out`}>
-                <div className='text-gray-200 font-mono flex justify-between'>
+              <div className={`rounded-2xl text-white bg-opacity-30 bg-black h-[50vh] w-[26rem] sm:w-[20rem] p-5 z-10 m-5 transition-all duration-500 ease-in-out flex flex-col justify-evenly gap-1`}>
+                <div className="px-2"><div className='text-gray-200 font-mono flex justify-between'>
                   <h1 className='text-1xl sm:text-xs transition-all ease-in-out duration-500'> Current Weather </h1>
                   <h1 className='tracking-tighter text-[1rem] sm:text-xs transition-all ease-in-out duration-500'> {date.toLocaleString()} </h1>
                 </div>
                 <div className='flex justify-between'>
                   <h1 className='text-sm font-light italic'>{forecastLive?.weather[0].description}</h1>
                   <CtoF onToggleTemperature={handleToggleTemperature} isCelsius={isCelsius} />
-                </div>
-                <div className='inline p-3 font-outfit transition-all ease-in-out duration-500'>
+                </div></div>
+                <div className='inline-block p-2 w-full font-outfit transition-all ease-in-out duration-500'>
                   <div className='flex gap-2 justify-between'>
-                    <h1 className='text-7xl sm:text-3xl transition-all ease-in-out duration-500 text-clamp font-semibold '>{forecast?.name}</h1>
-                    <div className='text-1xl h-full'>
+                    <h1 className='text-7xl md:text-3xl sm:text-4xl transition-all ease-in-out duration-500 text-clamp font-semibold '>{forecast?.name}</h1>
+                    <div className='text-sm h-full flex flex-col'>
                       <div className='flex gap-2 justify-between'>
-                        <h1 className='flex'>
+                        <h1 className='flex '>
                           <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={3} stroke='currentColor' className='w-3 h-6'>
                             <path strokeLinecap='round' strokeLinejoin='round' d='M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18' />
                           </svg>
                           {forecastLive?.main.temp_max && (isCelsius ? KtoC(forecastLive?.main.temp_max) : KtoF(forecastLive?.main.temp_max))}°<span className='text-1xl opacity-90'>{isCelsius ? "C" : "F"}</span>
                         </h1>
-                        <h1 className='flex '>
+                        <h1 className='flex justify-end'>
                           <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={3} stroke='currentColor' className='w-3 h-6'>
                             <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3' />
                           </svg>
@@ -145,7 +145,7 @@ export default function Weather({}: Props) {
                   <div className='flex'>
                     <div className='font-semibold inline pt-1 transition-all ease-in-out duration-500'>
                       {temperature !== null && (
-                        <div className='inline text-8xl sm:2xl '>
+                        <div className='inline text-8xl ,d:text-4xl sm:2xl '>
                           {isCelsius ? KtoC(temperature) : KtoF(temperature)}°<span className='text-4xl opacity-90'>{isCelsius ? "C" : "F"}</span>
                         </div>
                       )}
@@ -156,15 +156,13 @@ export default function Weather({}: Props) {
                   </div>
                 </div>
                 <div>
-                  <section className='flex overflow-x-scroll justify-start p-2 my-2'>
+                <section className='flex overflow-x-scroll justify-start p-2'>
                     {forecast?.list.map((item, i) => (
                       <div className='inline-block text-center px-3' key={i}>
-                        <p className="font-outfit">{i === 0 ? "Now" : new Date(item.dt * 1000 + 5.5 * 60 * 60 * 1000).getUTCHours()}</p>
-                        <img src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={`weather-icon-${item.weather[0].description}`}/>
+                        <p className='font-outfit'>{i === 0 ? "Now" : new Date(item.dt * 1000 + 5.5 * 60 * 60 * 1000).getUTCHours()}</p>
+                        <img src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={`weather-icon-${item.weather[0].description}`} className='max-w-full h-auto' />
                         <p className='text-sm font-bold'>
-                          <p className='text-sm font-bold'>
-                            {isCelsius ? KtoC(item.main.temp) : KtoF(item.main.temp)}°{isCelsius ? "C" : "F"}
-                          </p>
+                          {isCelsius ? KtoC(item.main.temp) : KtoF(item.main.temp)}°{isCelsius ? "C" : "F"}
                         </p>
                       </div>
                     ))}
