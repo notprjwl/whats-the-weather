@@ -1,19 +1,4 @@
-import { useState, useEffect } from "react";
-
-import rain from "../assets/weather-clips/rain.mp4";
-import sunny from "../assets/weather-clips/sunny.mp4";
-import thunder from "../assets/weather-clips/thunder.mp4";
-import eveningClouds from "../assets/weather-clips/eveningClouds.mp4";
-import cloudySunny from "../assets/weather-clips/cloudySunny.mp4";
-import snow from "../assets/weather-clips/snow.mp4";
-import mist from "../assets/weather-clips/mist.mp4";
-import darkNightClouds from "../assets/weather-clips/darkNightClouds.mp4";
-import nightSky from "../assets/weather-clips/nightSky.mp4";
-import thunder2 from "../assets/weather-clips/thunder2.mp4"
-import nightRain from "../assets/weather-clips/nightRain.mp4"
-import night from "../assets/weather-clips/night.mp4"
-import cloudy2 from "../assets/weather-clips/cloudy2.mp4"
-
+import { useState, useEffect, Suspense } from "react";
 
 type Props = {
   weatherDescription: string;
@@ -21,76 +6,74 @@ type Props = {
 };
 
 const WeatherVideo = ({ weatherDescription, dayOrNight }: Props) => {
-  const [videoSource, setVideoSource] = useState(sunny);
+  const [videoSource, setVideoSource] = useState<any>(null);
 
   useEffect(() => {
-    if(dayOrNight.includes("d")) {
-      switch (true) {
-        case weatherDescription.includes("rain"):
-        case weatherDescription.includes("shower rain"):
-          setVideoSource(rain);
-          break;
-        case weatherDescription.includes("thunderstorm"):
-          setVideoSource(thunder);
-          break;
-        case weatherDescription.includes("clouds"):
-          setVideoSource(cloudy2);
-          break;
-        case weatherDescription.includes("snow"):
-          setVideoSource(snow);
-          break;
-        case weatherDescription.includes("mist"):
-          setVideoSource(mist);
-          break;
-        case weatherDescription.includes("scattered clouds"):
-          setVideoSource(eveningClouds);
-          break;
-        case weatherDescription.includes("broken clouds"):
-          setVideoSource(darkNightClouds);
-          break;
-        case weatherDescription.includes("clear"):
-          setVideoSource(cloudySunny);
-          break;
-        default:
-          break;
-      }
-    }
-    else{
-      switch (true) {
+    const loadVideo = async () => {
+      if (dayOrNight.includes("d")) {
+        switch (true) {
           case weatherDescription.includes("rain"):
           case weatherDescription.includes("shower rain"):
-            setVideoSource(nightRain);
+            setVideoSource(await import("../assets/weather-clips/rain.mp4"));
             break;
           case weatherDescription.includes("thunderstorm"):
-            setVideoSource(thunder2);
+            setVideoSource(await import("../assets/weather-clips/thunder.mp4"));
             break;
           case weatherDescription.includes("clouds"):
-            setVideoSource(nightSky);
+            setVideoSource(await import("../assets/weather-clips/cloudy2.mp4"));
+            break;
+          case weatherDescription.includes("snow"):
+            setVideoSource(await import("../assets/weather-clips/snow.mp4"));
+            break;
+          case weatherDescription.includes("mist"):
+            setVideoSource(await import("../assets/weather-clips/mist.mp4"));
             break;
           case weatherDescription.includes("scattered clouds"):
-            setVideoSource(nightSky);
+            setVideoSource(await import("../assets/weather-clips/eveningClouds.mp4"));
             break;
           case weatherDescription.includes("broken clouds"):
-            setVideoSource(nightSky);
+            setVideoSource(await import("../assets/weather-clips/darkNightClouds.mp4"));
             break;
           case weatherDescription.includes("clear"):
-            setVideoSource(night);
+            setVideoSource(await import("../assets/weather-clips/cloudySunny.mp4"));
             break;
           default:
-            setVideoSource(night);
             break;
+        }
+      } else {
+        switch (true) {
+          case weatherDescription.includes("rain"):
+          case weatherDescription.includes("shower rain"):
+            setVideoSource(await import("../assets/weather-clips/nightRain.mp4"));
+            break;
+          case weatherDescription.includes("thunderstorm"):
+            setVideoSource(await import("../assets/weather-clips/thunder2.mp4"));
+            break;
+          case weatherDescription.includes("clouds"):
+          case weatherDescription.includes("scattered clouds"):
+          case weatherDescription.includes("broken clouds"):
+            setVideoSource(await import("../assets/weather-clips/nightSky.mp4"));
+            break;
+          case weatherDescription.includes("clear"):
+          default:
+            setVideoSource(await import("../assets/weather-clips/night.mp4"));
+            break;
+        }
       }
-      setVideoSource(night)
-    }
-   
-  }, [weatherDescription]);
+    };
+
+    loadVideo();
+  }, [weatherDescription, dayOrNight]);
 
   return (
-    <video autoPlay loop muted playsInline className='absolute inset-0 object-cover w-full h-full'>
-      <source src={videoSource} type='video/mp4' />
-    </video>
+    <Suspense fallback={<div>Loading...</div>}>
+      {videoSource && (
+        <video autoPlay loop muted playsInline className='absolute inset-0 object-cover w-full h-full'>
+          <source src={videoSource.default} type='video/mp4' />
+        </video>
+      )}
+    </Suspense>
   );
 };
-
 
 export default WeatherVideo;
