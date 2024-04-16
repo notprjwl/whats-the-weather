@@ -134,7 +134,7 @@ export default function Home() {
     <>
       <Navbar backgroundColor='bg-bg' handleHover={handleHover} currentColor={currentColor} />
       <body className='bg-bg text-text font-outfit min-h-screen'>
-        <div className='grid justify-center h-[70vh] sm:h-[60vh] align-center place-items-center'>
+        <div className='flex flex-col justify-evenly h-[70vh] sm:h-[60vh] align-center place-items-center'>
           <div className='text-center p-5'>
             <span className='text-6xl sm:text-4xl font-bold'>
               Is your weather <span className={`italic ${currentColor} text-6xl sm:text-4xl cursor-pointer transition-all duration-500 ease-in-out px-1`} onMouseEnter={handleHover}>weathering</span> today?
