@@ -54,23 +54,20 @@ export default function Home() {
   // fetching more data - lazy loading
   const fetchMoreData = () => {
     setTableLoading(true);
-    // Simulate fetching more data (you should replace this with your actual data fetching logic)
     setTimeout(() => {
       fetch("/data/cities2.json")
         .then((response) => response.json())
         .then((data) => {
-          // Append the new data to the existing list of cities
           setSearchData(data);
           const newData = data.slice(cities.length, cities.length + 10);
           setCities([...cities, ...newData]);
           setTableLoading(false);
-          // In a real implementation, you should update 'hasMore' based on whether there is more data to fetch.
         })
         .catch((error) => {
           console.error("Error fetching more data:", error);
           setTableLoading(false);
         });
-    }, 1000); // Simulating delay for loading indicator
+    }, 1000); 
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
