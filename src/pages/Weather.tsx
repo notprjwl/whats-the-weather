@@ -35,17 +35,13 @@ export default function Weather({}: Props) {
           const forecastLiveResp = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=${import.meta.env.VITE_API_URL}`);
           const data = await response.json();
           const forecastLiveData = await forecastLiveResp.json();
-          console.log(forecastLiveData);
           setForecastLive(forecastLiveData);
-          console.log(data);
           setTemperature(forecastLiveData.main.temp);
           const forecastData = {
             ...data.city,
             list: data.list.slice(0, 8),
           };
           setForecast(forecastData);
-          console.log(forecastData);
-          console.log(forecastLiveData.weather[0].main.toLowerCase());
           setDayOrNight(forecastLiveData.weather[0].icon);
           setWeatherDescription(forecastLiveData.weather[0].description.toLowerCase());
           setLoading(false); // Set loading to false when data fetching is completed
