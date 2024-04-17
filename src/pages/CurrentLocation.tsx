@@ -25,9 +25,8 @@ export default function CurrentLocation({}: Props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); // Set loading to true when fetching data starts
+      setLoading(true); 
       try {
-        // Simulate loading delay
         setTimeout(async () => {
           const response = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${import.meta.env.VITE_API_URL}`);
           const forecastLiveResp = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${import.meta.env.VITE_API_URL}`);
@@ -42,10 +41,10 @@ export default function CurrentLocation({}: Props) {
           setForecast(forecastData);
           setDayOrNight(forecastLiveData.weather[0].icon);
           setWeatherDescription(forecastLiveData.weather[0].description.toLowerCase());
-          setLoading(false); // Set loading to false when data fetching is completed
-        }, 3000); // Simulated loading delay of 2 seconds
+          setLoading(false); 
+        }, 3000); 
       } catch (error) {
-        setLoading(false); // Set loading to false in case of error
+        setLoading(false); 
         console.log("error fetching weather data", error);
         setError("Error fetching weather data. Please try again.");
       }
